@@ -12,7 +12,7 @@ public class UE5_MVVM_Example : ModuleRules
 		{
 			"Core", 
 			"CoreUObject", 
-			"Engine", 
+			"Engine",
 			"EnhancedInput",
 			"InputCore", 
 			"UMG",

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <CoreMinimal.h>
+#include <Components/ActorComponent.h>
 #include "TakeDamageComponent.generated.h"
 
 UCLASS()
@@ -11,7 +12,7 @@ class UTakeDamageComponent : public UActorComponent
 public:
 	void BeginPlay() override;
 
-	void OnTakeDamageTick();
+	void OnTakeDamageTick() const;
 	
 private:
 	FTimerHandle TakeDamageHandle;

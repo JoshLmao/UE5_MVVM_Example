@@ -2,6 +2,7 @@
 
 #include "UE5_MVVM_Example/Core/MyPlayerController.h"
 #include "UE5_MVVM_Example/Core/MyPlayerState.h"
+#include "UE5_MVVM_Example/Player/Core/MyPawn.h"
 #include "UE5_MVVM_Example/UI/Core/MyHUD.h"
 
 AMyGameModeBase::AMyGameModeBase()
@@ -9,4 +10,5 @@ AMyGameModeBase::AMyGameModeBase()
 	HUDClass = AMyHUD::StaticClass();
 	PlayerStateClass = AMyPlayerState::StaticClass();
 	PlayerControllerClass = AMyPlayerController::StaticClass();
+	DefaultPawnClass = AMyPawn::StaticClass();
 }
