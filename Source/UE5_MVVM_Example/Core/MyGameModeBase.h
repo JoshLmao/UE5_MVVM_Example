@@ -1,3 +1,5 @@
+#pragma once
+
 #include <CoreMinimal.h>
 #include <GameFramework/GameMode.h>
 #include "MyGameModeBase.generated.h"
