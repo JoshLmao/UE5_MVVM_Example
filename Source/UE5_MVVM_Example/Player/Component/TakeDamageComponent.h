@@ -12,8 +12,12 @@ class UTakeDamageComponent : public UActorComponent
 public:
 	void BeginPlay() override;
 
-	void OnTakeDamageTick() const;
-	
+	void OnTakeDamageTick();
+
+	void UpdateMaxHealth(int32 NewMaxHealth);
+	void UpdateCurrentHealth(int32 NewCurrentHealth);
+
+	class UVM_PlayerHealth* GetVMPlayerHealth();
 private:
 	FTimerHandle TakeDamageHandle;
 };
