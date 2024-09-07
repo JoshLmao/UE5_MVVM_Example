@@ -7,6 +7,7 @@
 #include <GameFramework/Controller.h>
 #include <Engine/World.h>
 #include <MVVMGameSubsystem.h>
+#include <MVVMSubsystem.h>
 
 #include "UE5_MVVM_Example/Core/MyPlayerState.h"
 #include "UE5_MVVM_Example/UI/MVVM/ViewModel/VM_PlayerHealth.h"
@@ -32,22 +33,31 @@ void UTakeDamageComponent::OnTakeDamageTick()
 void UTakeDamageComponent::UpdateMaxHealth(int32 NewMaxHealth)
 {
 	const auto VMPlayerHealth = GetVMPlayerHealth();
-	VMPlayerHealth->SetMaxHealth(NewMaxHealth);
+	if (IsValid(VMPlayerHealth))
+	{
+		VMPlayerHealth->SetMaxHealth(NewMaxHealth);
+	}
 }
 
 void UTakeDamageComponent::UpdateCurrentHealth(int32 NewCurrentHealth)
 {
 	const auto VMPlayerHealth = GetVMPlayerHealth();
-	VMPlayerHealth->SetCurrentHealth(NewCurrentHealth);
+	if (IsValid(VMPlayerHealth))
+	{
+		VMPlayerHealth->SetCurrentHealth(NewCurrentHealth);
+	}
 }
 
 UVM_PlayerHealth* UTakeDamageComponent::GetVMPlayerHealth()
 {
 	const auto VMCollection = GetWorld()->GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
-
+	
+	const auto MVVMEngineSubsystem = GEngine->GetEngineSubsystem<UMVVMSubsystem>();
+	
 	FMVVMViewModelContext Context;
-	Context.ContextName = TEXT("VM_PlayerHealth");
+	Context.ContextName = TEXT("UVM_PlayerHealth");
 	Context.ContextClass = UVM_PlayerHealth::StaticClass();
 
-	return Cast<UVM_PlayerHealth>(VMCollection->FindViewModelInstance(Context));
+	const auto Found = VMCollection->FindViewModelInstance(Context);
+	return Cast<UVM_PlayerHealth>(Found);
 }

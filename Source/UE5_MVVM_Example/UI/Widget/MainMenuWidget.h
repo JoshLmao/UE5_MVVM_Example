@@ -6,7 +6,12 @@ UCLASS(Abstract)
 class UMainMenuWidget : public UUserWidget
 {
     GENERATED_BODY()
-    
-public:
-    
+
+protected:
+    void NativeOnInitialized() override;
+    void NativePreConstruct() override;
+    void NativeConstruct() override;
+
+private:
+    class UObject* TryGetVM();
 };

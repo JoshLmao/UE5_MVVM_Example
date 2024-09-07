@@ -10,20 +10,20 @@ class AMyPlayerState : public APlayerState
 	GENERATED_BODY()
 
 public:
-	float GetCurrentHealth() { return CurrentHealth; };
-	float GetMaxHealth() { return MaxHealth; };
+	int32 GetCurrentHealth() { return CurrentHealth; };
+	int32 GetMaxHealth() { return MaxHealth; };
 
-	void SetCurrentHealth(float InHealth)
+	void SetCurrentHealth(int32 InHealth)
 	{
 		CurrentHealth = InHealth;
 	}
 
-	void SetMaxHealth(float InMaxHealth)
+	void SetMaxHealth(int32 InMaxHealth)
 	{
 		MaxHealth = InMaxHealth;
 	}
 
 private:
-	float CurrentHealth = 0.f;
-	float MaxHealth = 0.f;
+	int32 CurrentHealth = 0;
+	int32 MaxHealth = 0;
 };
