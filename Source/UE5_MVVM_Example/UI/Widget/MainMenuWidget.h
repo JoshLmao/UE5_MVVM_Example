@@ -13,5 +13,5 @@ protected:
     void NativeConstruct() override;
 
 private:
-    class UObject* TryGetVM();
+    class UVM_PlayerHealth* TryGetVM();
 };

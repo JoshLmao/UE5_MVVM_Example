@@ -32,10 +32,12 @@ void UMainMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	const auto VMInst = TryGetVM();	
+	const auto VMInst = TryGetVM();
+	const auto health = VMInst->GetCurrentHealth();
+	UE_LOG(LogTemp, Log, TEXT("Health = %d"), health);
 }
 
-class UObject* UMainMenuWidget::TryGetVM()
+UVM_PlayerHealth* UMainMenuWidget::TryGetVM()
 {
 	const auto Collection = GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
 	
@@ -45,7 +47,7 @@ class UObject* UMainMenuWidget::TryGetVM()
 	const auto VMInstance = Collection->FindViewModelInstance(Context);
 	if (IsValid(VMInstance))
 	{
-		return VMInstance;
+		return Cast<UVM_PlayerHealth>(VMInstance);
 	}
 	return nullptr;
 }
