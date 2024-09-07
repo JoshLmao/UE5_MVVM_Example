@@ -45,7 +45,7 @@ void UPartyWidget::VM_FieldChanged_Players(UObject* Object, UE::FieldNotificatio
 void UPartyWidget::DEBUG_AddMemberClicked()
 {
 	const auto VMInstance = TryGetViewModel<UVM_PartyPlayers>();
-	VMInstance->AddPlayer(FText::FromString("Player"));
+	VMInstance->AddPlayer(FText::Format(FText::FromString("Player{0}"), FText::AsNumber(DEBUG_TotalAddedCount++)));
 }
 
 void UPartyWidget::DEBUG_RemoveMemberClicked()

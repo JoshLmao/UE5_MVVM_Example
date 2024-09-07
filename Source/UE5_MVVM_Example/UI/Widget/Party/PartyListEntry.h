@@ -5,16 +5,6 @@
 #include <Blueprint/UserWidget.h>
 #include "PartyListEntry.generated.h"
 
-UCLASS()
-class UPartyMemberData : public UObject
-{
-	GENERATED_BODY()
-
-public:
-	FText Name;
-	FGuid ID;
-};
-
 UCLASS(Abstract)
 class UE5_MVVM_EXAMPLE_API UPartyListEntry : public UUserWidget, public IUserObjectListEntry
 {
@@ -30,5 +20,5 @@ private:
 	class UTextBlock* NameTextBlock;
 
 	UPROPERTY()
-	UPartyMemberData* MemberData;
+	class UPartyPlayer* MemberData;
 };

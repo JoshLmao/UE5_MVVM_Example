@@ -35,4 +35,5 @@ private:
 	void DEBUG_AddMemberClicked();
 	UFUNCTION()
 	void DEBUG_RemoveMemberClicked();
+	int DEBUG_TotalAddedCount = 0;
 };
