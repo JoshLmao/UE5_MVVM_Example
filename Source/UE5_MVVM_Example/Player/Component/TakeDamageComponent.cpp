@@ -52,10 +52,8 @@ UVM_PlayerHealth* UTakeDamageComponent::GetVMPlayerHealth()
 {
 	const auto VMCollection = GetWorld()->GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
 	
-	const auto MVVMEngineSubsystem = GEngine->GetEngineSubsystem<UMVVMSubsystem>();
-	
 	FMVVMViewModelContext Context;
-	Context.ContextName = TEXT("UVM_PlayerHealth");
+	Context.ContextName = TEXT("VM_PlayerHealth");
 	Context.ContextClass = UVM_PlayerHealth::StaticClass();
 
 	const auto Found = VMCollection->FindViewModelInstance(Context);

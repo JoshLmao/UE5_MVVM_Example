@@ -14,4 +14,9 @@ protected:
 
 private:
     class UVM_PlayerHealth* TryGetVM();
+
+    void OnFieldChanged(UObject* Object, UE::FieldNotification::FFieldId FieldId);
+    
+    UPROPERTY(meta=(BindWidget))
+    class UProgressBar* HealthProgressBar;
 };
