@@ -29,9 +29,9 @@ void UMainMenuWidget::NativeConstruct()
 
 void UMainMenuWidget::OnFieldChanged(UObject* Object, UE::FieldNotification::FFieldId FieldId)
 { 
-	UE_LOG(LogTemp, Log, TEXT("OnFieldChanged"));
 	const auto VM = TryGetVM();
-	HealthProgressBar->SetPercent(VM->CurrentHealth);
+	UE_LOG(LogTemp, Log, TEXT("CurrentHealth changed - new percent '%f' - current/max = %d/%d"), VM->GetHealthPercent(), VM->GetCurrentHealth(), VM->GetMaxHealth());
+	HealthProgressBar->SetPercent(VM->GetHealthPercent());
 }
 
 UVM_PlayerHealth* UMainMenuWidget::TryGetVM()

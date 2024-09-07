@@ -17,7 +17,8 @@ public:
 	void UpdateMaxHealth(int32 NewMaxHealth);
 	void UpdateCurrentHealth(int32 NewCurrentHealth);
 
-	class UVM_PlayerHealth* GetVMPlayerHealth();
 private:
+	class UVM_PlayerHealth* GetVMPlayerHealth();
+	class AMyPlayerState* GetPlayerState();
 	FTimerHandle TakeDamageHandle;
 };

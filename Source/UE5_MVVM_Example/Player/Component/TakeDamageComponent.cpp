@@ -17,17 +17,26 @@ void UTakeDamageComponent::BeginPlay()
 	Super::BeginPlay();
 
 	GetWorld()->GetTimerManager().SetTimer(TakeDamageHandle,this, &UTakeDamageComponent::OnTakeDamageTick, 2.0f, true);
+
+	// Init with default values
+	auto PlayerState = GetPlayerState();
+	auto VM = GetVMPlayerHealth();
+	
+	const int NewMaxHealth = 100;
+	PlayerState->SetMaxHealth(NewMaxHealth);
+	VM->SetMaxHealth(NewMaxHealth);
+
+	const int NewCurrentHealth = 100;
+	PlayerState->SetCurrentHealth(NewCurrentHealth);
+	VM->SetCurrentHealth(NewCurrentHealth);
 }
 
 void UTakeDamageComponent::OnTakeDamageTick()
 {
-	const auto Pawn = Cast<APawn>(GetOwner());
-
-	auto PlayerState = Pawn->GetController()->GetPlayerState<AMyPlayerState>();
+	auto PlayerState =GetPlayerState();
 	PlayerState->SetCurrentHealth(PlayerState->GetCurrentHealth() - 1.0f);
 
 	UpdateCurrentHealth(PlayerState->GetCurrentHealth());
-	UpdateMaxHealth(PlayerState->GetMaxHealth());
 }
 
 void UTakeDamageComponent::UpdateMaxHealth(int32 NewMaxHealth)
@@ -58,4 +67,11 @@ UVM_PlayerHealth* UTakeDamageComponent::GetVMPlayerHealth()
 
 	const auto Found = VMCollection->FindViewModelInstance(Context);
 	return Cast<UVM_PlayerHealth>(Found);
+}
+
+AMyPlayerState* UTakeDamageComponent::GetPlayerState()
+{
+	const auto Pawn = Cast<APawn>(GetOwner());
+	auto PlayerState = Pawn->GetController()->GetPlayerState<AMyPlayerState>();
+	return PlayerState;
 }

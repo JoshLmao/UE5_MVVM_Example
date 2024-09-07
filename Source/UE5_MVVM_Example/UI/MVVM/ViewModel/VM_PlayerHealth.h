@@ -41,12 +41,12 @@ public:
 	{
 		if (MaxHealth > 0)
 		{
-			return CurrentHealth / MaxHealth;
+			return (float)CurrentHealth / (float)MaxHealth;
 		}
 		return 0;
 	}
 	
-private:
+public:
 	UPROPERTY(BlueprintReadOnly, FieldNotify, Getter, Setter, meta=(AllowPrivateAccess))
 	int32 CurrentHealth = 0.f;
 
