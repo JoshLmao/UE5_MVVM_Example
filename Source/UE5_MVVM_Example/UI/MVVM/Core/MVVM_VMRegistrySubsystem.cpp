@@ -2,6 +2,7 @@
 
 #include "MVVMGameSubsystem.h"
 #include "MVVMViewModelBase.h"
+#include "UE5_MVVM_Example/UI/MVVM/ViewModel/VM_PartyPlayers.h"
 #include "UE5_MVVM_Example/UI/MVVM/ViewModel/VM_PlayerHealth.h"
 
 void UMVVM_VMRegistrySubsystem::Initialize(FSubsystemCollectionBase& Collection)
@@ -18,6 +19,7 @@ void UMVVM_VMRegistrySubsystem::RegisterViewModels()
 	const auto MVVMCollection = GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
 	
 	AddViewModel(MVVMCollection, UVM_PlayerHealth::StaticClass(), FName("VM_PlayerHealth"));
+	AddViewModel(MVVMCollection, UVM_PartyPlayers::StaticClass(), FName("VM_PartyPlayers"));
 }
 
 void UMVVM_VMRegistrySubsystem::AddViewModel(UMVVMViewModelCollectionObject* VMCollection, const TSubclassOf<UMVVMViewModelBase>& ViewModelClass,

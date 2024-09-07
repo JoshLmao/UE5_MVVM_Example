@@ -6,45 +6,23 @@
 #include "View/MVVMView.h"
 #include "View/MVVMViewClass.h"
 
-void UMainMenuWidget::NativeOnInitialized()
+UMainMenuWidget::UMainMenuWidget()
 {
-	Super::NativeOnInitialized();
-}
-
-void UMainMenuWidget::NativePreConstruct()
-{
-	Super::NativePreConstruct();
+	ViewModelClass = UVM_PlayerHealth::StaticClass();
+	ViewModelName = TEXT("VM_PlayerHealth");
 }
 
 void UMainMenuWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	const auto VMInst = TryGetVM();
-	const auto health = VMInst->GetCurrentHealth();
-	UE_LOG(LogTemp, Log, TEXT("Health = %d"), health);
-
+	const auto VMInst = TryGetViewModel<UVM_PlayerHealth>();
 	VMInst->AddFieldValueChangedDelegate(UVM_PlayerHealth::FFieldNotificationClassDescriptor::CurrentHealth, INotifyFieldValueChanged::FFieldValueChangedDelegate::CreateUObject(this, &UMainMenuWidget::OnFieldChanged));
 }
 
 void UMainMenuWidget::OnFieldChanged(UObject* Object, UE::FieldNotification::FFieldId FieldId)
 { 
-	const auto VM = TryGetVM();
+	const auto VM = TryGetViewModel<UVM_PlayerHealth>();
 	UE_LOG(LogTemp, Log, TEXT("CurrentHealth changed - new percent '%f' - current/max = %d/%d"), VM->GetHealthPercent(), VM->GetCurrentHealth(), VM->GetMaxHealth());
 	HealthProgressBar->SetPercent(VM->GetHealthPercent());
-}
-
-UVM_PlayerHealth* UMainMenuWidget::TryGetVM()
-{
-	const auto Collection = GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
-	
-	FMVVMViewModelContext Context;
-	Context.ContextClass = UVM_PlayerHealth::StaticClass();
-	Context.ContextName = TEXT("VM_PlayerHealth");
-	const auto VMInstance = Collection->FindViewModelInstance(Context);
-	if (IsValid(VMInstance))
-	{
-		return Cast<UVM_PlayerHealth>(VMInstance);
-	}
-	return nullptr;
 }

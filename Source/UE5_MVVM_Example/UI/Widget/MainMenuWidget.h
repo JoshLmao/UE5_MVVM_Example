@@ -1,20 +1,19 @@
 #include <CoreMinimal.h>
-#include <Blueprint/UserWidget.h>
+#include "Core/MyBaseUserWidget.h"
 #include "MainMenuWidget.generated.h"
 
 UCLASS(Abstract)
-class UMainMenuWidget : public UUserWidget
+class UMainMenuWidget : public UMyBaseUserWidget
 {
     GENERATED_BODY()
 
+public:
+    UMainMenuWidget();
+    
 protected:
-    void NativeOnInitialized() override;
-    void NativePreConstruct() override;
     void NativeConstruct() override;
 
 private:
-    class UVM_PlayerHealth* TryGetVM();
-
     void OnFieldChanged(UObject* Object, UE::FieldNotification::FFieldId FieldId);
     
     UPROPERTY(meta=(BindWidget))
