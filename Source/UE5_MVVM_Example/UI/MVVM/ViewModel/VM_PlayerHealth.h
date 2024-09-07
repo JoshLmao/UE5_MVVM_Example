@@ -46,7 +46,7 @@ public:
 		return 0;
 	}
 	
-public:
+private:
 	UPROPERTY(BlueprintReadOnly, FieldNotify, Getter, Setter, meta=(AllowPrivateAccess))
 	int32 CurrentHealth = 0.f;
 
