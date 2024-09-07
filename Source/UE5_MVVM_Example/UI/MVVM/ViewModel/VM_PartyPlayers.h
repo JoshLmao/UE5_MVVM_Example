@@ -4,8 +4,8 @@
 #include "MVVMViewModelBase.h"
 #include "VM_PartyPlayers.generated.h"
 
-USTRUCT(BlueprintType)
-struct FPartyPlayer
+UCLASS(BlueprintType)
+class UPartyPlayer : public UObject
 {
 	GENERATED_BODY()
 
@@ -32,19 +32,21 @@ class UE5_MVVM_EXAMPLE_API UVM_PartyPlayers : public UMVVMViewModelBase
 	GENERATED_BODY()
 
 public:
-	const TArray<FPartyPlayer>& GetPlayers() const
+	const TArray<UPartyPlayer*>& GetPlayers() const
 	{
 		return Players;
 	}
 
-	void SetPlayers(const TArray<FPartyPlayer>& InPlayers)
+	void SetPlayers(const TArray<UPartyPlayer*>& InPlayers)
 	{
 		Players = InPlayers;
 	}
 	
 	void AddPlayer(const FText& Name)
 	{
-		Players.Add(FPartyPlayer{Name});
+		auto Player = NewObject<UPartyPlayer>(this);
+		Player->Name = Name;
+		Players.Add(Player);
 		UE_MVVM_BROADCAST_FIELD_VALUE_CHANGED(Players);
 	}
 
@@ -67,7 +69,7 @@ public:
 private:
 	// Array of members of the party
 	UPROPERTY(BlueprintReadOnly, FieldNotify, Getter, Setter, meta=(AllowPrivateAccess))
-	TArray<FPartyPlayer> Players;
+	TArray<UPartyPlayer*> Players;
 
 	UPROPERTY(BlueprintReadOnly, FieldNotify, Getter, Setter, meta=(AllowPrivateAccess))
 	EPartyStatus Status;

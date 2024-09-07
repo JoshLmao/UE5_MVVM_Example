@@ -18,7 +18,7 @@ protected:
 		const auto Collection = GetGameInstance()->GetSubsystem<UMVVMGameSubsystem>()->GetViewModelCollection();
 	
 		FMVVMViewModelContext Context;
-		Context.ContextClass = ViewModelClass->StaticClass();
+		Context.ContextClass = ViewModelClass;
 		Context.ContextName = ViewModelName;
 		const auto VMInstance = Collection->FindViewModelInstance(Context);
 		if (IsValid(VMInstance))

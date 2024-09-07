@@ -1,10 +1,7 @@
 #include "UE5_MVVM_Example/UI/Widget/MainMenuWidget.h"
 
-#include "MVVMGameSubsystem.h"
 #include "Components/ProgressBar.h"
 #include "UE5_MVVM_Example/UI/MVVM/ViewModel/VM_PlayerHealth.h"
-#include "View/MVVMView.h"
-#include "View/MVVMViewClass.h"
 
 UMainMenuWidget::UMainMenuWidget()
 {
